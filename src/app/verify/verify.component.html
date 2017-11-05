@@ -1,0 +1,15 @@
+<h3>An SMS has been sent to {{formattedPhone}}.</h3>
+<h5>Verify your phone number below by entering the six-digit code provided in the SMS message.</h5>
+<div id="verification-code">
+  <div id="verify-inputs" class="ui input">
+      <input *ngFor="let digit of [0, 1, 2, 3, 4, 5]; let i=index;" (keyup)="next($event, i)" type="text" maxLength="1" />
+  </div>
+  <div id="verify-submit">
+    <button [disabled]="!valid" (click)="verify()" class="ui primary animated button" tabindex="0">
+        <div class="visible content">Verify</div>
+        <div class="hidden content">
+          <i [ngClass]="{'fa': true, 'fa-arrow-right': !loading, 'fa-refresh': loading, 'fa-spin': loading}"></i>
+        </div>
+      </button>
+  </div>
+</div>

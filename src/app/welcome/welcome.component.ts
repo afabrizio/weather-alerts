@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-welcome',
@@ -11,14 +12,16 @@ export class WelcomeComponent implements OnInit {
   public phone = '';
   public valid = false;
 
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit() { }
 
-  getAlerts(e: Event) {
-    console.log(this.numsOnly(this.phone));
+  getAlerts() {
     this.loading = true;
-    setTimeout(() => this.loading = false, 500);
+    setTimeout(() => {
+      this.loading = false;
+      this.router.navigate(['/verify/' + this.phone]);
+    }, 250);
   }
 
   validate() {

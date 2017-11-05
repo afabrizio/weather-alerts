@@ -3,7 +3,7 @@
   <div class="ui input">
     <input (keyup)="validate()" [(ngModel)]="phone" [textMask]="{mask: mask}" name="phone" type="text" placeholder="Phone Number" />
   </div>
-  <button [disabled]="!valid" (click)="getAlerts($event)" class="ui primary animated button" tabindex="0">
+  <button [disabled]="!valid" (click)="getAlerts()" class="ui primary animated button" tabindex="0">
     <div class="visible content">Get Alerts</div>
     <div class="hidden content">
       <i [ngClass]="{'fa': true, 'fa-arrow-right': !loading, 'fa-refresh': loading, 'fa-spin': loading}"></i>
