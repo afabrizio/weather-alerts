@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { ApiService } from '../../services/api.service';
+
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
@@ -12,16 +14,27 @@ export class WelcomeComponent implements OnInit {
   public phone = '';
   public valid = false;
 
-  constructor(public router: Router) { }
+  constructor(public api: ApiService, public router: Router) { }
 
   ngOnInit() { }
 
   getAlerts() {
     this.loading = true;
-    setTimeout(() => {
-      this.loading = false;
-      this.router.navigate(['/verify/' + this.phone]);
-    }, 250);
+    this.api.screenPhone(this.numsOnly(this.phone))
+      .subscribe(
+        data => {
+          this.loading = false;
+          if (data.payload && data.payload.verified) {
+            this.router.navigate(['/dashboard/' + this.phone]);
+          } else {
+            this.router.navigate(['/verify/' + this.phone]);
+          }
+        },
+        error => {
+          this.loading = false;
+          console.warn(error);
+        }
+      );
   }
 
   validate() {

@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { VerifyComponent } from './verify/verify.component';
-import { WelcomeComponent } from './welcome/welcome.component';
+import { DashboardComponent } from '../components/dashboard/dashboard.component';
+import { VerifyComponent } from '../components/verify/verify.component';
+import { WelcomeComponent } from '../components/welcome/welcome.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'verify/:phone',
     component: VerifyComponent,
+  },
+  {
+    path: 'dashboard/:phone',
+    component: DashboardComponent,
   },
   {
     path: '**',

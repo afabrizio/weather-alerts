@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
+import { ApiService } from '../../services/api.service';
 
 import 'rxjs/add/operator/map';
 
@@ -16,6 +18,7 @@ export class VerifyComponent implements OnInit {
   code = [null, null, null, null, null, null];
 
   constructor(
+    public api: ApiService,
     private route: ActivatedRoute,
     private router: Router,
   ) {}
@@ -53,10 +56,18 @@ export class VerifyComponent implements OnInit {
 
   verify() {
     this.loading = true;
-    setTimeout(() => {
-      this.loading = false;
-      console.log(this.phone, this.code);
-    }, 250);
+    this.api.screenPhone(this.phone.toString())
+      .subscribe(
+        data => {
+          this.loading = false;
+          console.log('api screen response:', data);
+          // this.router.navigate(['/dashboard/' + this.phone]);
+        },
+        error => {
+          this.loading = false;
+          console.warn(error);
+        }
+      );
   }
 
 }
