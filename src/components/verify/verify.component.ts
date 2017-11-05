@@ -12,10 +12,11 @@ import 'rxjs/add/operator/map';
 })
 export class VerifyComponent implements OnInit {
   formattedPhone;
-  phone: number;
+  phone: string;
   loading = false;
   valid = false;
   code = [null, null, null, null, null, null];
+  userFail = false;
 
   constructor(
     public api: ApiService,
@@ -28,7 +29,7 @@ export class VerifyComponent implements OnInit {
       .map( (params: ParamMap) => params.get('phone'))
       .subscribe( (phone: string) => {
         this.formattedPhone = phone;
-        this.phone = parseInt(phone.replace(new RegExp('[^0-9]', 'g'), ''), 10);
+        this.phone = phone.replace(new RegExp('[^0-9]', 'g'), '');
       });
   }
 
@@ -39,7 +40,7 @@ export class VerifyComponent implements OnInit {
       this.code[i] = undefined;
     } else {
       (e.target as any).value = e.key;
-      this.code[i] = parseInt(e.key, 10);
+      this.code[i] = e.key;
       // Moves focus tp next input:
       if ( i < 5) {
         (document.querySelector(`input:nth-child(${i + 2})`) as any).focus();
@@ -55,13 +56,18 @@ export class VerifyComponent implements OnInit {
   }
 
   verify() {
+    this.userFail = false;
     this.loading = true;
-    this.api.screenPhone(this.phone.toString())
+    const unverifiedCode = (this.code.toString()).replace(/,/g, '');
+    this.api.verify(this.phone, unverifiedCode)
       .subscribe(
         data => {
           this.loading = false;
-          console.log('api screen response:', data);
-          // this.router.navigate(['/dashboard/' + this.phone]);
+          if (data.user && data.user.verified) {
+            this.router.navigate(['/dashboard/' + this.phone]);
+          } else {
+            this.userFail = true;
+          }
         },
         error => {
           this.loading = false;

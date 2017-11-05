@@ -22,4 +22,8 @@ export class ApiService {
     return this.gateway('/screen', { phone: phone } );
   }
 
+  verify(phone: string, unverifiedCode: string): Observable<any> {
+    return this.gateway('/verify', { phone : phone, unverifiedCode: unverifiedCode});
+  }
+
 }

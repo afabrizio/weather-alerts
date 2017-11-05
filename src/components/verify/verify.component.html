@@ -12,4 +12,7 @@
         </div>
       </button>
   </div>
+  <div id="verification-fail" [ngClass]="{'ui': true, 'message': true, 'negative': true, 'hidden': !userFail}">
+    <p>Incorrect Verification Code</p>
+  </div>
 </div>
