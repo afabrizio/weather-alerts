@@ -1,7 +1,7 @@
-<section>
-  <h3>Enter your phone number to get the weather!</h3>
-  <input (keyup)="validate()" [(ngModel)]="phone" [textMask]="{mask: mask}" name="phone" type="text" placeholder="phone number" />
-  <button [disabled]="!valid" (click)="getAlerts($event)">Get Alerts</button>
-</section>
+<app-header></app-header>
 
-<router-outlet></router-outlet>
+<div class="app">
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
