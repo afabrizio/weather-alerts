@@ -7,10 +7,10 @@ Narration and Explanation of Technical Stack Chosen:
   Back-End:
     - going with a Node.js runtime environment because it allows me to write the backed using JavaScript.
     - using the Express.js framework for handling HTTP requsts to the API.
+    - choose to use MongoDB for the database because I have not used it before and this is a good opportunity to try it out.
   Cloud Hosting:
     - decided to use AWS EC2 instance to host the application because it is industry standard and I could take advantage of the free tier for the purposes of this project.
-    - choose to use MongoDB for the database because I have not used it before and this is a good opportunity to try it out.
   SMS Service:
     - decided to user Twillio due to popularity and free trial.
   Weather API
-    - decided to ...
+    - decided to OpenWeatherMap API beacause it is free, seems simple to use, and well-documented.

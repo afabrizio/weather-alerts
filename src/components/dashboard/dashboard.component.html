@@ -1,3 +1,7 @@
+<div class="ui input">
+  <input [(ngModel)]="city" type="text" placeholder="City" />
+</div>
+
 <table class="ui selectable celled table">
     <thead>
       <tr>
@@ -6,12 +10,13 @@
     </thead>
     <tbody>
       <tr *ngFor="let row of rows">
-        <td>{{row.icon}}</td>
+        <td>
+          <i [ngClass]="{'fa': true, 'fa-cloud': true}"></i>
+        </td>
         <td>{{row.service}}</td>
         <td>
-          <button class="ui primary button">
-            <i class="fa fa-phone"></i>
-            <span style="padding-left: 10px">{{row.action}}</span>
+          <button class="ui primary button" (click)="weatherSMS()">
+            <span>{{row.action}}</span>
           </button>
         </td>
       </tr>

@@ -26,4 +26,8 @@ export class ApiService {
     return this.gateway('/verify', { phone : phone, unverifiedCode: unverifiedCode});
   }
 
+  weatherSMS(phone: string, city: string): Observable<any> {
+    return this.gateway('/weather', { phone : phone, city: city});
+  }
+
 }
