@@ -24,7 +24,7 @@ export class WelcomeComponent implements OnInit {
       .subscribe(
         data => {
           this.loading = false;
-          if (data.payload && data.payload.verified) {
+          if (data.user && data.user.verified) {
             this.router.navigate(['/dashboard/' + this.phone]);
           } else {
             this.router.navigate(['/verify/' + this.phone]);
